@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">UnicornSparkles</string>
+    <string name="app_name">Unicorn Sparkles</string>
     <string name="wallpaper_label">Unicorn Sparkles</string>
+    <string name="wallpaper_description">Unicorn Sparkles description here</string>
 </resources>
