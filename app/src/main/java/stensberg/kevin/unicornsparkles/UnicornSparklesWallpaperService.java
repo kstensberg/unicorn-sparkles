@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.service.wallpaper.WallpaperService;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
 import java.text.DateFormat;
@@ -25,11 +27,10 @@ public class UnicornSparklesWallpaperService extends WallpaperService {
             public void run() {
                 draw();
             }
-
         };
 
         public UnicornSparklesWallpaperEngine() {
-
+            setTouchEventsEnabled(true);
             bgColor = Color.parseColor("#C0C0C0");
             handler.post(drawRunner);
         }
@@ -56,6 +57,10 @@ public class UnicornSparklesWallpaperService extends WallpaperService {
             super.onSurfaceChanged(holder, format, width, height);
         }
 
+        public void onTouchEvent (MotionEvent event) {
+
+        }
+
         private void draw() {
             SurfaceHolder holder = getSurfaceHolder();
             Canvas canvas = null;
@@ -77,6 +82,7 @@ public class UnicornSparklesWallpaperService extends WallpaperService {
         }
 
         private void draw(Canvas canvas) {
+            Log.w("LiveWallpaper", "drawing");
             canvas.drawColor(bgColor);
 
             Paint paint = new Paint();
