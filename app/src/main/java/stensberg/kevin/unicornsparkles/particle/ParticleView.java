@@ -3,7 +3,6 @@ package stensberg.kevin.unicornsparkles.particle;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -13,41 +12,41 @@ import android.view.SurfaceView;
 // Modified by Kevin Stensberg <kstensberg@gmail.com>
 public class ParticleView extends SurfaceView implements SurfaceHolder.Callback {
 
-    private ParticleDrawingThread mDrawingThread;
+    private ParticleDrawingThread drawingThread;
 
-    private ArrayList<Particle> mParticleList;
-    private ArrayList<Particle> mRecycleList;
+    private ArrayList<Particle> particleList;
+    private ArrayList<Particle> recycleList;
 
-    private Context mContext;
+    private Context context;
 
     public ParticleView(Context context) {
         super(context);
         SurfaceHolder holder = getHolder();
         holder.addCallback(this);
-        this.mContext = context;
+        this.context = context;
 
     }
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        mDrawingThread.setSurfaceSize(width, height);
+        drawingThread.setSurfaceSize(width, height);
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        mDrawingThread = new ParticleDrawingThread(holder, mContext);
-        mParticleList = mDrawingThread.getParticleList();
-        mRecycleList = mDrawingThread.getRecycleList();
-        mDrawingThread.start();
+        drawingThread = new ParticleDrawingThread(holder, context);
+        particleList = drawingThread.getParticleList();
+        recycleList = drawingThread.getRecycleList();
+        drawingThread.start();
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         boolean retry = true;
-        mDrawingThread.stopDrawing();
+        drawingThread.stopDrawing();
         while (retry) {
             try {
-                mDrawingThread.join();
+                drawingThread.join();
                 retry = false;
             } catch (InterruptedException e) {
             }
@@ -59,19 +58,19 @@ public class ParticleView extends SurfaceView implements SurfaceHolder.Callback 
         Particle p;
         int recycleCount = 0;
 
-        if(mRecycleList.size() > 1)
+        if(recycleList.size() > 1)
             recycleCount = 2;
         else
-            recycleCount = mRecycleList.size();
+            recycleCount = recycleList.size();
 
         for (int i = 0; i < recycleCount; i++) {
-            p = mRecycleList.remove(0);
+            p = recycleList.remove(0);
             p.init((int)event.getX(), (int)event.getY());
-            mParticleList.add(p);
+            particleList.add(p);
         }
 
         for (int i = 0; i < 2-recycleCount; i++)
-            mParticleList.add(new Particle((int)event.getX(), (int)event.getY()));
+            particleList.add(new Particle((int)event.getX(), (int)event.getY()));
 
         super.onTouchEvent(event);
 
