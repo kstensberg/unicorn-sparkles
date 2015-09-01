@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import stensberg.kevin.unicornsparkles.particle.ParticalView;
+import stensberg.kevin.unicornsparkles.particle.ParticleView;
 
 public class MainActivity extends Activity {
     @Override
@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
 
         LinearLayout topLayout = (LinearLayout) findViewById(R.id. top_layout);
 
-        ParticalView view = new ParticalView(this);
+        ParticleView view = new ParticleView(this);
         topLayout.addView(view);
     }
 
