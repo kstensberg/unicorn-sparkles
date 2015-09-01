@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
 import android.view.SurfaceHolder;
 
 import stensberg.kevin.unicornsparkles.R;
@@ -18,57 +17,57 @@ import stensberg.kevin.unicornsparkles.UiUtils;
 // Modified by Kevin Stensberg <kstensberg@gmail.com>
 class ParticleDrawingThread extends Thread {
 
-    private boolean mRun = true;
+    private boolean run = true;
 
-    private SurfaceHolder mSurfaceHolder;
+    private SurfaceHolder surfaceHolder;
 
-    private ArrayList<Particle> mParticleList = new ArrayList<Particle>();
-    private ArrayList<Particle> mRecycleList = new ArrayList<Particle>();
+    private ArrayList<Particle> particleList = new ArrayList<Particle>();
+    private ArrayList<Particle> recycleList = new ArrayList<Particle>();
 
-    private int mCanvasWidth;
-    private int mCanvasHeight;
-    private Paint mPaint;
+    private int canvasWidth;
+    private int canvasHeight;
+    private Paint paint;
 
-    private Bitmap mImage[] =new Bitmap[3];
+    private Bitmap images[] = new Bitmap[3];
 
-    public ParticleDrawingThread(SurfaceHolder mSurfaceHolder, Context context) {
-        this.mSurfaceHolder = mSurfaceHolder;
-        this.mPaint = new Paint();
-        mPaint.setColor(Color.WHITE);
+    public ParticleDrawingThread(SurfaceHolder surfaceHolder, Context context) {
+        this.surfaceHolder = surfaceHolder;
+        this.paint = new Paint();
+        paint.setColor(Color.WHITE);
 
-        mImage[0] = UiUtils.getBitmapFromResourceId(context, R.drawable.yellow_spark);
-        mImage[1] = UiUtils.getBitmapFromResourceId(context, R.drawable.blue_spark);
-        mImage[2] = UiUtils.getBitmapFromResourceId(context, R.drawable.red_spark);
+        images[0] = UiUtils.getBitmapFromResourceId(context, R.drawable.yellow_spark);
+        images[1] = UiUtils.getBitmapFromResourceId(context, R.drawable.blue_spark);
+        images[2] = UiUtils.getBitmapFromResourceId(context, R.drawable.red_spark);
 
     }
 
     @Override
     public void run() {
-        while (mRun) {
+        while (run) {
             Canvas c = null;
             try {
-                c = mSurfaceHolder.lockCanvas(null);
-                synchronized (mSurfaceHolder) {
+                c = surfaceHolder.lockCanvas(null);
+                synchronized (surfaceHolder) {
                     doDraw(c);
                 }
             } finally {
                 if (c != null) {
-                    mSurfaceHolder.unlockCanvasAndPost(c);
+                    surfaceHolder.unlockCanvasAndPost(c);
                 }
             }
         }
     }
 
     private void doDraw(Canvas c) {
-        c.drawRect(0, 0, mCanvasWidth, mCanvasHeight, mPaint);
-        synchronized (mParticleList) {
-            for (int i = 0; i < mParticleList.size(); i++) {
-                Particle p = mParticleList.get(i);
+        c.drawRect(0, 0, canvasWidth, canvasHeight, paint);
+        synchronized (particleList) {
+            for (int i = 0; i < particleList.size(); i++) {
+                Particle p = particleList.get(i);
                 p.move();
 
-                c.drawBitmap(mImage[p.color], p.x-10, p.y-10, mPaint);
-                if (p.x < 0 || p.x > mCanvasWidth || p.y < 0 || p.y > mCanvasHeight) {
-                    mRecycleList.add(mParticleList.remove(i));
+                c.drawBitmap(images[p.color], p.x-10, p.y-10, paint);
+                if (p.x < 0 || p.x > canvasWidth || p.y < 0 || p.y > canvasHeight) {
+                    recycleList.add(particleList.remove(i));
                     i--;
                 }
             }
@@ -76,19 +75,19 @@ class ParticleDrawingThread extends Thread {
     }
 
     public void stopDrawing() {
-        this.mRun = false;
+        this.run = false;
     }
 
     public ArrayList<Particle> getParticleList() {
-        return mParticleList;
+        return particleList;
     }
 
     public ArrayList<Particle> getRecycleList() {
-        return mRecycleList;
+        return recycleList;
     }
 
     public void setSurfaceSize(int width, int height) {
-        mCanvasWidth = width;
-        mCanvasHeight = height;
+        canvasWidth = width;
+        canvasHeight = height;
     }
 }
