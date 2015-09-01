@@ -55,7 +55,7 @@ public class ParticleView extends SurfaceView implements SurfaceHolder.Callback 
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Particle p;
+        Particle particle;
         int recycleCount = 0;
 
         if(recycleList.size() > 1)
@@ -64,12 +64,12 @@ public class ParticleView extends SurfaceView implements SurfaceHolder.Callback 
             recycleCount = recycleList.size();
 
         for (int i = 0; i < recycleCount; i++) {
-            p = recycleList.remove(0);
-            p.init((int)event.getX(), (int)event.getY());
-            particleList.add(p);
+            particle = recycleList.remove(0);
+            particle.init((int) event.getX(), (int) event.getY());
+            particleList.add(particle);
         }
 
-        for (int i = 0; i < 2-recycleCount; i++)
+        for (int i = 0; i < 2 - recycleCount; i++)
             particleList.add(new Particle((int)event.getX(), (int)event.getY()));
 
         super.onTouchEvent(event);
