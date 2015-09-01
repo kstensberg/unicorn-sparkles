@@ -56,7 +56,6 @@ public class ParticleView extends SurfaceView implements SurfaceHolder.Callback 
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.d("touch", "touch event");
         Particle p;
         int recycleCount = 0;
 
