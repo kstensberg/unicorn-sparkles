@@ -3,6 +3,7 @@ package stensberg.kevin.unicornsparkles.particle;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -10,7 +11,7 @@ import android.view.SurfaceView;
 // Originally found at https://github.com/manoj-chauhan/Sparkles/
 // Written by Manoj Chauhan <manojchauhan100@gmail.com>
 // Modified by Kevin Stensberg <kstensberg@gmail.com>
-public class ParticalView extends SurfaceView implements SurfaceHolder.Callback {
+public class ParticleView extends SurfaceView implements SurfaceHolder.Callback {
 
     private ParticleDrawingThread mDrawingThread;
 
@@ -19,7 +20,7 @@ public class ParticalView extends SurfaceView implements SurfaceHolder.Callback 
 
     private Context mContext;
 
-    public ParticalView(Context context) {
+    public ParticleView(Context context) {
         super(context);
         SurfaceHolder holder = getHolder();
         holder.addCallback(this);
@@ -55,23 +56,26 @@ public class ParticalView extends SurfaceView implements SurfaceHolder.Callback 
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.d("touch", "touch event");
         Particle p;
         int recycleCount = 0;
 
-        if(mRecycleList.size()>1)
+        if(mRecycleList.size() > 1)
             recycleCount = 2;
         else
-            recycleCount =mRecycleList.size();
+            recycleCount = mRecycleList.size();
 
         for (int i = 0; i < recycleCount; i++) {
             p = mRecycleList.remove(0);
-            p.init((int) event.getX(), (int) event.getY());
+            p.init((int)event.getX(), (int)event.getY());
             mParticleList.add(p);
         }
 
         for (int i = 0; i < 2-recycleCount; i++)
             mParticleList.add(new Particle((int)event.getX(), (int)event.getY()));
 
-        return super.onTouchEvent(event);
+        super.onTouchEvent(event);
+
+        return true;
     }
 }
