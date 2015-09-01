@@ -17,12 +17,12 @@ import stensberg.kevin.unicornsparkles.UiUtils;
 // Modified by Kevin Stensberg <kstensberg@gmail.com>
 class ParticleDrawingThread extends Thread {
 
-    private boolean run = true;
+    private boolean running = true;
 
     private SurfaceHolder surfaceHolder;
 
-    private ArrayList<Particle> particleList = new ArrayList<Particle>();
-    private ArrayList<Particle> recycleList = new ArrayList<Particle>();
+    private ArrayList<Particle> particleList = new ArrayList<>();
+    private ArrayList<Particle> recycleList = new ArrayList<>();
 
     private int canvasWidth;
     private int canvasHeight;
@@ -43,30 +43,30 @@ class ParticleDrawingThread extends Thread {
 
     @Override
     public void run() {
-        while (run) {
-            Canvas c = null;
+        while (running) {
+            Canvas canvas = null;
             try {
-                c = surfaceHolder.lockCanvas(null);
+                canvas = surfaceHolder.lockCanvas(null);
                 synchronized (surfaceHolder) {
-                    doDraw(c);
+                    doDraw(canvas);
                 }
             } finally {
-                if (c != null) {
-                    surfaceHolder.unlockCanvasAndPost(c);
+                if (canvas != null) {
+                    surfaceHolder.unlockCanvasAndPost(canvas);
                 }
             }
         }
     }
 
-    private void doDraw(Canvas c) {
-        c.drawRect(0, 0, canvasWidth, canvasHeight, paint);
+    private void doDraw(Canvas canvas) {
+        canvas.drawRect(0, 0, canvasWidth, canvasHeight, paint);
         synchronized (particleList) {
             for (int i = 0; i < particleList.size(); i++) {
-                Particle p = particleList.get(i);
-                p.move();
+                Particle particle = particleList.get(i);
+                particle.move();
 
-                c.drawBitmap(images[p.color], p.x-10, p.y-10, paint);
-                if (p.x < 0 || p.x > canvasWidth || p.y < 0 || p.y > canvasHeight) {
+                canvas.drawBitmap(images[particle.color], particle.x - 10, particle.y - 10, paint);
+                if (particle.x < 0 || particle.x > canvasWidth || particle.y < 0 || particle.y > canvasHeight) {
                     recycleList.add(particleList.remove(i));
                     i--;
                 }
@@ -75,7 +75,7 @@ class ParticleDrawingThread extends Thread {
     }
 
     public void stopDrawing() {
-        this.run = false;
+        this.running = false;
     }
 
     public ArrayList<Particle> getParticleList() {
