@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.app.WallpaperManager;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import java.util.ArrayList;
 
 import stensberg.kevin.unicornsparkles.particle.ParticleView;
 
@@ -18,7 +21,12 @@ public class MainActivity extends Activity {
 
         LinearLayout topLayout = (LinearLayout) findViewById(R.id. top_layout);
 
-        ParticleView view = new ParticleView(this);
+        ArrayList<Bitmap> bitmaps = new ArrayList<Bitmap>();
+        bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.blue_spark));
+        bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.red_spark));
+        bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.yellow_spark));
+
+        ParticleView view = new ParticleView(this, bitmaps);
         topLayout.addView(view);
     }
 

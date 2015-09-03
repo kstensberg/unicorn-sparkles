@@ -3,7 +3,6 @@ package stensberg.kevin.unicornsparkles.particle;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -28,16 +27,10 @@ class ParticleDrawingThread extends Thread {
     private int canvasHeight;
     private Paint paint;
 
-    private Bitmap images[] = new Bitmap[3];
-
     public ParticleDrawingThread(SurfaceHolder surfaceHolder, Context context) {
         this.surfaceHolder = surfaceHolder;
         this.paint = new Paint();
         paint.setColor(Color.WHITE);
-
-        images[0] = UiUtils.getBitmapFromResourceId(context, R.drawable.yellow_spark);
-        images[1] = UiUtils.getBitmapFromResourceId(context, R.drawable.blue_spark);
-        images[2] = UiUtils.getBitmapFromResourceId(context, R.drawable.red_spark);
 
     }
 
@@ -65,7 +58,8 @@ class ParticleDrawingThread extends Thread {
                 Particle particle = particleList.get(i);
                 particle.move();
 
-                canvas.drawBitmap(images[particle.color], particle.x - 10, particle.y - 10, paint);
+                canvas.drawBitmap(particle.bitmap, particle.x - 10, particle.y - 10, paint);
+
                 if (particle.x < 0 || particle.x > canvasWidth || particle.y < 0 || particle.y > canvasHeight) {
                     recycleList.add(particleList.remove(i));
                     i--;
