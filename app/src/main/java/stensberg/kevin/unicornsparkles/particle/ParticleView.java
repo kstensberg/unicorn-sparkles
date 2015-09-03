@@ -78,7 +78,6 @@ public class ParticleView extends SurfaceView implements SurfaceHolder.Callback 
             particleList.add(particle);
         }
 
-
         for (int i = 0; i < 2 - recycleCount; i++)
             particleList.add(new Particle((int)event.getX(), (int)event.getY(), bitmap));
 
