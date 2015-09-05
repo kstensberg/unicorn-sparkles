@@ -10,5 +10,5 @@
         android:text="Set Live wallpaper"
         android:id="@+id/button"
         android:onClick="setWallpaper"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
 </LinearLayout>

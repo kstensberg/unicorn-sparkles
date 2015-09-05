@@ -58,7 +58,7 @@ public class UnicornSparklesWallpaperService extends WallpaperService {
         }
 
         public void onTouchEvent (MotionEvent event) {
-
+            Log.d("WallpaperService", "touch event");
         }
 
         private void draw() {
@@ -89,9 +89,9 @@ public class UnicornSparklesWallpaperService extends WallpaperService {
             paint.setColor(Color.BLUE);
             paint.setTextSize(74);
 
-            String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+            //String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
-            canvas.drawText(currentDateTimeString, 40, 100, paint);
+            //canvas.drawText(currentDateTimeString, 40, 100, paint);
         }
 
     }

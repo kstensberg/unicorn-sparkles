@@ -27,12 +27,12 @@ public class MainActivity extends Activity {
         bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.yellow_spark));
         bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.unicorn1));
         bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.unicorn2));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp1));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp2));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp3));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp4));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp5));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp6));
+        //bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp1));
+        //bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp2));
+        //bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp3));
+        //bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp4));
+        //bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp5));
+        //bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp6));
         bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.rainbow1));
 
         ParticleView view = new ParticleView(this, bitmaps);

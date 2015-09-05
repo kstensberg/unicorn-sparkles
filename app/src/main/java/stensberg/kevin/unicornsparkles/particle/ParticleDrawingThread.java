@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.SurfaceHolder;
 
 import stensberg.kevin.unicornsparkles.R;
@@ -51,6 +52,10 @@ class ParticleDrawingThread extends Thread {
     }
 
     private void doDraw(Canvas canvas) {
+        if (canvas == null) {
+            return;
+        }
+
         canvas.drawRect(0, 0, canvasWidth, canvasHeight, paint);
         synchronized (particleList) {
             for (int i = 0; i < particleList.size(); i++) {
