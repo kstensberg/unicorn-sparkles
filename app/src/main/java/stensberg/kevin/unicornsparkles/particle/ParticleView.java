@@ -18,7 +18,6 @@ public class ParticleView extends SurfaceView implements SurfaceHolder.Callback 
     private ParticleDrawingThread drawingThread;
 
     private ArrayList<Particle> particleList;
-    private ArrayList<Particle> recycleList;
 
     private List<Bitmap> bitmaps;
 
@@ -41,7 +40,6 @@ public class ParticleView extends SurfaceView implements SurfaceHolder.Callback 
     public void surfaceCreated(SurfaceHolder holder) {
         drawingThread = new ParticleDrawingThread(holder, context);
         particleList = drawingThread.getParticleList();
-        recycleList = drawingThread.getRecycleList();
         drawingThread.start();
     }
 
@@ -60,26 +58,11 @@ public class ParticleView extends SurfaceView implements SurfaceHolder.Callback 
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Particle particle;
-        int recycleCount = 0;
-
-        if(recycleList.size() > 1)
-            recycleCount = 2;
-        else
-            recycleCount = recycleList.size();
-
         Random rand = new Random();
         int bitmapIdx = rand.nextInt(bitmaps.size());
         Bitmap bitmap = bitmaps.get(bitmapIdx);
 
-        for (int i = 0; i < recycleCount; i++) {
-            particle = recycleList.remove(0);
-            particle.init((int) event.getX(), (int) event.getY(), bitmap);
-            particleList.add(particle);
-        }
-
-        for (int i = 0; i < 2 - recycleCount; i++)
-            particleList.add(new Particle((int)event.getX(), (int)event.getY(), bitmap));
+        particleList.add(new Particle((int)event.getX(), (int)event.getY(), bitmap));
 
         super.onTouchEvent(event);
 
