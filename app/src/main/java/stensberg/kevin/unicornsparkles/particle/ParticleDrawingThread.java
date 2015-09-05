@@ -21,7 +21,6 @@ class ParticleDrawingThread extends Thread {
     private SurfaceHolder surfaceHolder;
 
     private ArrayList<Particle> particleList = new ArrayList<>();
-    private ArrayList<Particle> recycleList = new ArrayList<>();
 
     private int canvasWidth;
     private int canvasHeight;
@@ -61,7 +60,7 @@ class ParticleDrawingThread extends Thread {
                 canvas.drawBitmap(particle.bitmap, particle.x - 10, particle.y - 10, paint);
 
                 if (particle.x < 0 || particle.x > canvasWidth || particle.y < 0 || particle.y > canvasHeight) {
-                    recycleList.add(particleList.remove(i));
+                    particleList.remove(i);
                     i--;
                 }
             }
@@ -74,10 +73,6 @@ class ParticleDrawingThread extends Thread {
 
     public ArrayList<Particle> getParticleList() {
         return particleList;
-    }
-
-    public ArrayList<Particle> getRecycleList() {
-        return recycleList;
     }
 
     public void setSurfaceSize(int width, int height) {

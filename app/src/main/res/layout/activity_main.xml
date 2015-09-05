@@ -9,5 +9,6 @@
         android:layout_height="wrap_content"
         android:text="Set Live wallpaper"
         android:id="@+id/button"
-        android:onClick="setWallpaper" />
+        android:onClick="setWallpaper"
+        android:visibility="gone"/>
 </LinearLayout>
