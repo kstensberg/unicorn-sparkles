@@ -1,5 +1,6 @@
 package stensberg.kevin.unicornsparkles;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,6 +12,10 @@ import android.view.SurfaceHolder;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
+
+import stensberg.kevin.unicornsparkles.particle.Particle;
+import stensberg.kevin.unicornsparkles.particle.ParticleDrawingThread;
 
 public class UnicornSparklesWallpaperService extends WallpaperService {
     @Override
@@ -19,9 +24,14 @@ public class UnicornSparklesWallpaperService extends WallpaperService {
     }
 
     private class UnicornSparklesWallpaperEngine extends Engine {
-        private final Handler handler = new Handler();
+
         private int bgColor;
         private boolean visible = true;
+
+        private ParticleDrawingThread drawingThread;
+        private List<Particle> particleList;
+
+        private final Handler handler = new Handler();
         private final Runnable drawRunner = new Runnable() {
             @Override
             public void run() {
@@ -32,6 +42,14 @@ public class UnicornSparklesWallpaperService extends WallpaperService {
         public UnicornSparklesWallpaperEngine() {
             setTouchEventsEnabled(true);
             bgColor = Color.parseColor("#C0C0C0");
+
+            SurfaceHolder holder = getSurfaceHolder();
+            Context context = getApplicationContext();
+
+            drawingThread = new ParticleDrawingThread(holder, context);
+            particleList = drawingThread.getParticleList();
+            drawingThread.start();
+
             handler.post(drawRunner);
         }
 

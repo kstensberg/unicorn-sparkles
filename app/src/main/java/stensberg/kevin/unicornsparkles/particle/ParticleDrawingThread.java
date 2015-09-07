@@ -15,7 +15,7 @@ import stensberg.kevin.unicornsparkles.UiUtils;
 // Originally found at https://github.com/manoj-chauhan/Sparkles/
 // Written by Manoj Chauhan <manojchauhan100@gmail.com>
 // Modified by Kevin Stensberg <kstensberg@gmail.com>
-class ParticleDrawingThread extends Thread {
+public class ParticleDrawingThread extends Thread {
 
     private boolean running = true;
 
