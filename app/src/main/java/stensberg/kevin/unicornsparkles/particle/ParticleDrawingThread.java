@@ -80,10 +80,6 @@ public class ParticleDrawingThread extends Thread {
         this.running = false;
     }
 
-    public ArrayList<Particle> getParticleList() {
-        return particleList;
-    }
-
     public void setSurfaceSize(int width, int height) {
         canvasWidth = width;
         canvasHeight = height;

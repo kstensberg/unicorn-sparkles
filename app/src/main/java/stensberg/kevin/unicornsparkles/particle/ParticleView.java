@@ -1,6 +1,5 @@
 package stensberg.kevin.unicornsparkles.particle;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -10,14 +9,14 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import stensberg.kevin.unicornsparkles.UiUtils;
+
 // Originally found at https://github.com/manoj-chauhan/Sparkles/
 // Written by Manoj Chauhan <manojchauhan100@gmail.com>
 // Modified by Kevin Stensberg <kstensberg@gmail.com>
 public class ParticleView extends SurfaceView implements SurfaceHolder.Callback {
 
     private ParticleDrawingThread drawingThread;
-
-    private ArrayList<Particle> particleList;
 
     private List<Bitmap> bitmaps;
 
@@ -39,7 +38,6 @@ public class ParticleView extends SurfaceView implements SurfaceHolder.Callback 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         drawingThread = new ParticleDrawingThread(holder, context);
-        particleList = drawingThread.getParticleList();
         drawingThread.start();
     }
 
@@ -58,17 +56,11 @@ public class ParticleView extends SurfaceView implements SurfaceHolder.Callback 
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Bitmap bitmap = getRandomParticleBitmap();
+        Bitmap bitmap = UiUtils.getRandomBitmap(getContext());
         drawingThread.emitParticle(new Particle((int)event.getX(), (int)event.getY(), bitmap));
 
         super.onTouchEvent(event);
 
         return true;
-    }
-
-    private Bitmap getRandomParticleBitmap() {
-        Random rand = new Random();
-        int bitmapIdx = rand.nextInt(bitmaps.size());
-        return bitmaps.get(bitmapIdx);
     }
 }
