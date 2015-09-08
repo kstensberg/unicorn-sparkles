@@ -34,6 +34,10 @@ public class ParticleDrawingThread extends Thread {
 
     }
 
+    public void emitParticle(Particle particle) {
+        particleList.add(particle);
+    }
+
     @Override
     public void run() {
         while (running) {

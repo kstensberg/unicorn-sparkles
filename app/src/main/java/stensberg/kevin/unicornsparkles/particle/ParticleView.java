@@ -58,14 +58,17 @@ public class ParticleView extends SurfaceView implements SurfaceHolder.Callback 
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Random rand = new Random();
-        int bitmapIdx = rand.nextInt(bitmaps.size());
-        Bitmap bitmap = bitmaps.get(bitmapIdx);
-
-        particleList.add(new Particle((int)event.getX(), (int)event.getY(), bitmap));
+        Bitmap bitmap = getRandomParticleBitmap();
+        drawingThread.emitParticle(new Particle((int)event.getX(), (int)event.getY(), bitmap));
 
         super.onTouchEvent(event);
 
         return true;
+    }
+
+    private Bitmap getRandomParticleBitmap() {
+        Random rand = new Random();
+        int bitmapIdx = rand.nextInt(bitmaps.size());
+        return bitmaps.get(bitmapIdx);
     }
 }
