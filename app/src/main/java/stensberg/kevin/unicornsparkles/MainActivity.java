@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import stensberg.kevin.unicornsparkles.particle.ParticleView;
 
@@ -21,19 +21,7 @@ public class MainActivity extends Activity {
 
         LinearLayout topLayout = (LinearLayout) findViewById(R.id. top_layout);
 
-        ArrayList<Bitmap> bitmaps = new ArrayList<Bitmap>();
-        bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.blue_spark));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.red_spark));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.yellow_spark));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.unicorn1));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.unicorn2));
-        //bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp1));
-        //bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp2));
-        //bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp3));
-        //bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp4));
-        //bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp5));
-        //bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.mlp6));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(this, R.drawable.rainbow1));
+        List<Bitmap> bitmaps = UiUtils.getAllBitmaps(this);
 
         ParticleView view = new ParticleView(this, bitmaps);
         topLayout.addView(view);
