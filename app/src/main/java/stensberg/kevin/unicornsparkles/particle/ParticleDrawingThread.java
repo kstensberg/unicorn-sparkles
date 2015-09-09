@@ -8,6 +8,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.SurfaceHolder;
 
+import stensberg.kevin.unicornsparkles.R;
+import stensberg.kevin.unicornsparkles.UiUtils;
+
 // Originally found at https://github.com/manoj-chauhan/Sparkles/
 // Written by Manoj Chauhan <manojchauhan100@gmail.com>
 // Modified by Kevin Stensberg <kstensberg@gmail.com>
@@ -26,7 +29,7 @@ public class ParticleDrawingThread extends Thread {
     public ParticleDrawingThread(SurfaceHolder surfaceHolder, Context context) {
         this.surfaceHolder = surfaceHolder;
         this.paint = new Paint();
-        paint.setColor(Color.WHITE);
+        paint.setColor(UiUtils.getColorFromResourceId(context, R.color.background_color));
 
     }
 
