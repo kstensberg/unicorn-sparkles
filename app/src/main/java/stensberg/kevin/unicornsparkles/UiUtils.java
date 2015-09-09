@@ -44,4 +44,8 @@ public class UiUtils {
         int bitmapIdx = rand.nextInt(allBitmaps.size());
         return allBitmaps.get(bitmapIdx);
     }
+
+    public static int getColorFromResourceId(Context context, int resourceId) {
+        return ContextCompat.getColor(context, resourceId);
+    }
 }
