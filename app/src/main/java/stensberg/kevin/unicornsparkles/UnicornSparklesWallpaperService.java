@@ -30,10 +30,10 @@ public class UnicornSparklesWallpaperService extends WallpaperService {
 
             SurfaceHolder holder = getSurfaceHolder();
             holder.addCallback(this);
-            Context context = getApplicationContext();
+            //Context context = getApplicationContext();
 
-            drawingThread = new ParticleDrawingThread(holder, context);
-            drawingThread.start();
+            //drawingThread = new ParticleDrawingThread(holder, context);
+            //drawingThread.start();
         }
 
         @Override
