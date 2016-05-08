@@ -22,18 +22,10 @@ public class UiUtils {
     public static List<Bitmap> getAllBitmaps(Context context) {
         ArrayList<Bitmap> bitmaps = new ArrayList<>();
 
-        bitmaps.add(UiUtils.getBitmapFromResourceId(context, R.drawable.blue_spark));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(context, R.drawable.red_spark));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(context, R.drawable.yellow_spark));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(context, R.drawable.unicorn1));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(context, R.drawable.unicorn2));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(context, R.drawable.mlp1));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(context, R.drawable.mlp2));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(context, R.drawable.mlp3));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(context, R.drawable.mlp4));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(context, R.drawable.mlp5));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(context, R.drawable.mlp6));
-        bitmaps.add(UiUtils.getBitmapFromResourceId(context, R.drawable.rainbow1));
+        bitmaps.add(UiUtils.getBitmapFromResourceId(context, R.drawable.bug));
+        bitmaps.add(UiUtils.getBitmapFromResourceId(context, R.drawable.droplet));
+        bitmaps.add(UiUtils.getBitmapFromResourceId(context, R.drawable.heart));
+        bitmaps.add(UiUtils.getBitmapFromResourceId(context, R.drawable.moon));
 
         return bitmaps;
     }
